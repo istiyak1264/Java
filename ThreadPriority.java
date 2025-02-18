@@ -1,7 +1,7 @@
 /* ThreadPriorityDemo.java: A program which shows altering order of threads 
    by changing priority. */
 
-   class A extends Thread {
+class A extends Thread {
     public void run() {
         System.out.println("Thread A started");
         for (int i = 1; i < 4; i++)
@@ -28,15 +28,15 @@ class C extends Thread {
     }
 }
 
-public class ThreadPriorityDemo {
+public class ThreadPriority {
     public static void main(String args[]) {
         A threadA = new A();
         B threadB = new B();
         C threadC = new C();
 
-        threadA.setPriority(Thread.MAX_PRIORITY);
-        threadB.setPriority(threadA.getPriority() + 1);
-        threadC.setPriority(Thread.MIN_PRIORITY);
+        threadA.setPriority(Thread.MAX_PRIORITY); // 10
+        threadB.setPriority(Thread.NORM_PRIORITY); // 5
+        threadC.setPriority(Thread.MIN_PRIORITY); // 1
 
         System.out.println("Started Thread A");
         threadA.start();

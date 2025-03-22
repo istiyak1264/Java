@@ -8,26 +8,19 @@ public class EchoClient
         try
         {
             System.out.println("Client started...");
-            Socket s = new Socket("localhost", 1234);
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-            PrintWriter out = new PrintWriter(s.getOutputStream(), true);
+            Socket socket = new Socket("localhost", 1234);
+            
             BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
+            PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            String line;
-            while(true)
-            {
-                System.out.print("Enter message: ");
-                line = userInput.readLine();
-                if (line.equalsIgnoreCase("exit")) break;
-                out.println(line);
-                System.out.println("Server: " + in.readLine());
-            }
+            System.out.print("Enter message: ");
+            String str = userInput.readLine();
+            output.println(str);
+            
+            System.out.println(input.readLine());
 
-            in.close();
-            out.close();
-            userInput.close();
-            s.close();
+            socket.close();
         }
         catch (Exception e)
         {

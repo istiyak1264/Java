@@ -5,29 +5,26 @@ public class EchoServer
 {
     public static void main(String[] args)
     {
-        try
+        try (ServerSocket serverSocket = new ServerSocket(1234))
         {
-            System.out.println("Waiting for clients....");
-            ServerSocket ss = new ServerSocket(1234);
-            Socket s = ss.accept();
-            System.out.println("Connection Established...");
+            System.out.println("Server started. Waiting for client...");
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-            PrintWriter out = new PrintWriter(s.getOutputStream(), true);
-
-            String line = in.readLine();
-            while (line != null)
+            while (true)
             {
-                System.out.println("Client: " + line);
-                out.println("Echo: " + line);
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("Client connected.");
+                
+                BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                PrintWriter output = new PrintWriter(clientSocket.getOutputStream(), true);
+                
+                String receivedMessage = input.readLine();
+                System.out.println("Received: " + receivedMessage);
+                output.println("Echo: " + receivedMessage);
+                
+                clientSocket.close();
             }
-
-            in.close();
-            out.close();
-            s.close();
-            ss.close();
         }
-        catch (Exception e)
+        catch (IOException e)
         {
             e.printStackTrace();
         }

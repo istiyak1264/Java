@@ -24,7 +24,7 @@ public class EchoServer
                 clientSocket.close();
             }
         }
-        catch (IOException e)
+        catch(Exception e)
         {
             e.printStackTrace();
         }

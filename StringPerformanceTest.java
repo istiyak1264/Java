@@ -6,7 +6,8 @@ public class StringPerformanceTest
 
         long startTime = System.nanoTime();
         StringBuffer stringBuffer = new StringBuffer();
-        for (int i = 0; i < iterations; i++) {
+        for (int i = 0; i < iterations; i++)
+        {
             stringBuffer.append("A");
         }
         long endTime = System.nanoTime();
@@ -14,7 +15,8 @@ public class StringPerformanceTest
 
         startTime = System.nanoTime();
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < iterations; i++) {
+        for (int i = 0; i < iterations; i++)
+        {
             stringBuilder.append("A");
         }
         endTime = System.nanoTime();
